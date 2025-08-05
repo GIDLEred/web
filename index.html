@@ -1,0 +1,736 @@
+<html lang="zh-CN"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>幻梦九艺社 | 游戏社团</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    // 配置Tailwind自定义主题
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6C5CE7', // 主色调：紫色
+            secondary: '#00F5D4', // 辅助色：青绿色
+            accent: '#FD79A8', // 强调色：粉红色
+            dark: '#1A1A2E', // 深色背景
+            darker: '#121224', // 更深色背景
+          },
+          fontFamily: {
+            gaming: ['"Press Start 2P"', 'cursive', 'sans-serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      }
+      .text-glow {
+        text-shadow: 0 0 10px rgba(108, 92, 231, 0.8);
+      }
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+      .animate-pulse-slow {
+        animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+      .activity-featured {
+        border: 2px solid #FD79A8;
+      }
+      .modal-backdrop {
+        backdrop-filter: blur(5px);
+      }
+      .img-zoom {
+        transition: transform 0.3s ease;
+      }
+      .img-zoom:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+</head>
+<body class="bg-dark text-gray-200 font-sans overflow-x-hidden">
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full z-50 transition-all duration-300">
+    <nav class="container mx-auto px-4 py-4 flex justify-between items-center bg-darker/80 backdrop-blur-md rounded-b-xl">
+      <a href="#" class="flex items-center gap-2">
+        <span class="text-primary text-2xl"><i class="fa fa-gamepad"></i></span>
+        <span class="font-gaming text-lg text-white">幻梦九艺社</span>
+      </a>
+      
+      <!-- 桌面导航 -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#about" class="hover:text-secondary transition-colors">关于我们</a>
+        <a href="#activities" class="hover:text-secondary transition-colors">社团活动</a>
+        <a href="#members" class="hover:text-secondary transition-colors">社团成员</a>
+        <a href="#contact" class="hover:text-secondary transition-colors">加入我们</a>
+      </div>
+      
+      <!-- 移动端菜单按钮 -->
+      <button id="menu-toggle" class="md:hidden text-white focus:outline-none">
+        <i class="fa fa-bars text-2xl"></i>
+      </button>
+    </nav>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-darker/95 backdrop-blur-md">
+      <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+        <a href="#about" class="py-2 hover:text-secondary transition-colors">关于我们</a>
+        <a href="#activities" class="py-2 hover:text-secondary transition-colors">社团活动</a>
+        <a href="#members" class="py-2 hover:text-secondary transition-colors">社团成员</a>
+        <a href="#contact" class="py-2 hover:text-secondary transition-colors">加入我们</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 英雄区域 -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+    <!-- 背景装饰 -->
+    <div class="absolute inset-0 z-0">
+      <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/20 rounded-full filter blur-3xl animate-pulse-slow"></div>
+      <div class="absolute bottom-1/3 right-1/3 w-80 h-80 bg-accent/20 rounded-full filter blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 z-10 text-center">
+      <h1 class="font-gaming text-[clamp(2rem,6vw,4rem)] leading-tight mb-6 text-white text-glow">
+        幻梦<span class="text-primary">九艺社</span>
+      </h1>
+      <p class="text-xl md:text-2xl mb-10 max-w-2xl mx-auto text-gray-300">
+        探索游戏的无限可能，结交志同道合的伙伴，一起创造游戏传奇
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#about" class="bg-primary hover:bg-primary/80 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg shadow-primary/30">
+          了解更多
+        </a>
+        <a href="#contact" class="bg-transparent border-2 border-secondary text-secondary hover:bg-secondary/10 font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105">
+          加入我们
+        </a>
+      </div>
+      
+      <!-- 滚动提示 -->
+      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <i class="fa fa-chevron-down text-gray-400"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于我们 -->
+  <section id="about" class="py-20 relative">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4 text-white">关于<span class="text-primary">我们</span></h2>
+        <div class="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="order-2 md:order-1">
+          <h3 class="text-2xl font-bold mb-6 text-white">游戏爱好者的<span class="text-secondary">天堂</span></h3>
+          <p class="text-gray-300 mb-6 leading-relaxed">
+            幻梦九艺社成立于2018年，是一所专注于游戏文化交流、游戏开发学习和竞技比赛的学生社团。我们的成员来自不同专业，但都拥有对游戏的热爱和热情。
+          </p>
+          <p class="text-gray-300 mb-8 leading-relaxed">
+            无论你是硬核玩家、休闲玩家，还是对游戏开发、设计、策划感兴趣的同学，都能在这里找到志同道合的伙伴，一起探索游戏的无限可能。
+          </p>
+          
+          <div class="grid grid-cols-2 gap-6">
+            <div class="bg-darker p-6 rounded-xl border border-primary/20 hover:border-primary/50 transition-all transform hover:-translate-y-1">
+              <div class="text-primary text-3xl mb-4"><i class="fa fa-users"></i></div>
+              <h4 class="text-xl font-bold mb-2">50+ 成员</h4>
+              <p class="text-gray-400">来自不同专业的游戏爱好者</p>
+            </div>
+            <div class="bg-darker p-6 rounded-xl border border-primary/20 hover:border-primary/50 transition-all transform hover:-translate-y-1">
+              <div class="text-primary text-3xl mb-4"><i class="fa fa-trophy"></i></div>
+              <h4 class="text-xl font-bold mb-2">12+ 赛事</h4>
+              <p class="text-gray-400">校内外游戏比赛获奖</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="order-1 md:order-2 relative">
+          <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500">
+            <img src="https://picsum.photos/seed/gameclub/600/400" alt="游戏社团活动照片" class="w-full h-auto">
+          </div>
+          <div class="absolute -bottom-6 -left-6 w-64 h-64 bg-primary/10 rounded-full filter blur-3xl z-0"></div>
+          <div class="absolute -top-6 -right-6 w-48 h-48 bg-accent/10 rounded-full filter blur-3xl z-0"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 社团活动 -->
+  <section id="activities" class="py-20 bg-darker relative">
+    <div class="absolute inset-0 z-0">
+      <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-primary/5 rounded-full filter blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4 text-white">社团<span class="text-primary">活动</span></h2>
+        <div class="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
+        <p class="mt-6 text-gray-400 max-w-2xl mx-auto">我们定期举办各种游戏相关活动，从休闲聚会到竞技比赛，满足不同成员的需求。点击活动卡片可查看历史活动照片。</p>
+      </div>
+      
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 活动卡片 1 - 桌游活动 -->
+        <div class="bg-dark rounded-xl overflow-hidden group hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer activity-card" data-activity="boardgames">
+          <div class="relative overflow-hidden h-56">
+            <img src="https://picsum.photos/seed/boardgame/500/300" alt="周末线下桌游活动" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+            <div class="absolute bottom-4 left-4 bg-primary/90 text-white text-sm font-bold px-3 py-1 rounded-full">
+              每周活动
+            </div>
+            <div class="absolute top-4 right-4 bg-dark/70 text-white text-sm px-3 py-1 rounded-full flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <i class="fa fa-images mr-1"></i> 查看历史照片
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2 text-white">周末线下桌游活动</h3>
+            <p class="text-gray-400 mb-4">每周六下午举行的线下桌游聚会，包含策略类、卡牌类、派对类等多种桌游，适合各种兴趣的玩家。</p>
+            <div class="flex items-center text-gray-500 text-sm">
+              <span class="flex items-center mr-4"><i class="fa fa-calendar mr-2"></i> 每周六</span>
+              <span class="flex items-center"><i class="fa fa-map-marker mr-2"></i> 社团活动室</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 活动卡片 2 - 电竞比赛 -->
+        <div class="bg-dark rounded-xl overflow-hidden group hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer activity-card" data-activity="esports">
+          <div class="relative overflow-hidden h-56">
+            <img src="https://picsum.photos/seed/esports/500/300" alt="电子竞技比赛" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+            <div class="absolute bottom-4 left-4 bg-accent/90 text-white text-sm font-bold px-3 py-1 rounded-full">
+              每月活动
+            </div>
+            <div class="absolute top-4 right-4 bg-dark/70 text-white text-sm px-3 py-1 rounded-full flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <i class="fa fa-images mr-1"></i> 查看历史照片
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2 text-white">电子竞技比赛</h3>
+            <p class="text-gray-400 mb-4">每月举办的面向全校的竞技比赛，包括LOL、CSGO、王者荣耀等热门竞技游戏。</p>
+            <div class="flex items-center text-gray-500 text-sm">
+              <span class="flex items-center mr-4"><i class="fa fa-calendar mr-2"></i> 每月最后一周</span>
+              <span class="flex items-center"><i class="fa fa-map-marker mr-2"></i> 电竞馆</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 活动卡片 3 - 年度聚会 (大型活动) -->
+        <div class="bg-dark rounded-xl overflow-hidden group hover:shadow-xl hover:shadow-accent/20 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer activity-card activity-featured" data-activity="gathering">
+          <div class="relative overflow-hidden h-56">
+            <img src="https://picsum.photos/seed/gamecarnival/500/300" alt="年度游戏嘉年华" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+            <div class="absolute top-4 right-4 bg-accent text-white text-sm font-bold px-3 py-1 rounded-full flex items-center">
+              <i class="fa fa-star mr-1"></i> 大型活动
+            </div>
+            <div class="absolute bottom-4 left-4 bg-primary/90 text-white text-sm font-bold px-3 py-1 rounded-full">
+              特别活动
+            </div>
+            <div class="absolute top-4 right-24 bg-dark/70 text-white text-sm px-3 py-1 rounded-full flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <i class="fa fa-images mr-1"></i> 查看历史照片
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2 text-white">年度游戏聚会</h3>
+            <p class="text-gray-400 mb-4">为期很久的的线上游戏聚会，多人游戏或者mmo。</p>
+            <div class="flex items-center text-gray-500 text-sm">
+              <span class="flex items-center mr-4"><i class="fa fa-calendar mr-2"></i> 时间不固定</span>
+              <span class="flex items-center"><i class="fa fa-map-marker mr-2"></i> 体育馆</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-12 text-center">
+        <a href="#contact" class="inline-block bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold py-3 px-8 rounded-full transition-all">
+          查看更多活动 <i class="fa fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 社团成员 -->
+  <section id="members" class="py-20 relative">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4 text-white">社团<span class="text-primary">成员</span></h2>
+        <div class="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
+        <p class="mt-6 text-gray-400 max-w-2xl mx-auto">认识我们社团的核心成员，每个人都在不同领域贡献自己的力量</p>
+      </div>
+      
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- 成员 1 -->
+        <div class="bg-darker rounded-xl overflow-hidden group hover:shadow-xl hover:shadow-primary/10 transition-all duration-300">
+          <div class="relative">
+            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/71caaf177918442185db576ea4a5636f~tplv-a9rns2rl98-image.image?rcl=202508051509320A25537CC15E1A3DF4D1&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1754982572&amp;x-signature=flc7iMi%2Fo20X7EC09TqLUtyBsCs%3D" alt="社长：张明" class="w-full aspect-square object-cover object-center">
+            <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6">
+              <div class="flex space-x-4">
+                <a href="#" class="text-white hover:text-primary transition-colors"><i class="fa fa-weixin text-xl"></i></a>
+                <a href="#" class="text-white hover:text-primary transition-colors"><i class="fa fa-qq text-xl"></i></a>
+                <a href="#" class="text-white hover:text-primary transition-colors"><i class="fa fa-github text-xl"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-bold mb-1 text-white">燃太阳</h3>
+            <p class="text-primary mb-3">社长</p>
+            <p class="text-gray-400 text-sm">课巨多的专业，喜欢玩原神和三角洲，以前是猫娘，平时脖子带狗牌低头玩手机的太阳</p>
+          </div>
+        </div>
+        
+        <!-- 成员 2 -->
+        <div class="bg-darker rounded-xl overflow-hidden group hover:shadow-xl hover:shadow-primary/10 transition-all duration-300">
+          <div class="relative">
+            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/67603df318d549a49838e05b94dba39d~tplv-a9rns2rl98-image.image?rcl=202508051510339CBE1FE391B179414B3D&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1754982634&amp;x-signature=898NYyj3wdWYFJICpBXJxqg%2Bw%2Fw%3D" alt="游戏设计师：李华" class="w-full aspect-square object-cover object-center">
+            <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6">
+              <div class="flex space-x-4">
+                <a href="#" class="text-white hover:text-primary transition-colors"><i class="fa fa-weixin text-xl"></i></a>
+                <a href="#" class="text-white hover:text-primary transition-colors"><i class="fa fa-qq text-xl"></i></a>
+                <a href="#" class="text-white hover:text-primary transition-colors"><i class="fa fa-github text-xl"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-bold mb-1 text-white">晚雷雨</h3>
+            <p class="text-primary mb-3">辐射</p>
+            <p class="text-gray-400 text-sm">专业，什么游戏都玩，b站up主。</p>
+          </div>
+        </div>
+        
+        <!-- 成员 3 -->
+        <div class="bg-darker rounded-xl overflow-hidden group hover:shadow-xl hover:shadow-primary/10 transition-all duration-300">
+          <div class="relative">
+            <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/ffd12799c20942ec9411fb6c55fe8dbe~tplv-a9rns2rl98-image.image?rcl=2025080515121655DE65E53C804804C169&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1754982737&amp;x-signature=zmH6r1yyvmj%2FuhkkqJZpWQ1FCzk%3D" alt="电竞队长：王强" class="w-full aspect-square object-cover object-center">
+            <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6">
+              <div class="flex space-x-4">
+                <a href="#" class="text-white hover:text-primary transition-colors"><i class="fa fa-weixin text-xl"></i></a>
+                <a href="#" class="text-white hover:text-primary transition-colors"><i class="fa fa-qq text-xl"></i></a>
+                <a href="#" class="text-white hover:text-primary transition-colors"><i class="fa fa-github text-xl"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-bold mb-1 text-white">red</h3>
+            <p class="text-primary mb-3">addbdg</p>
+            <p class="text-gray-400 text-sm">课很少的专业,伟大的、优秀的、无敌的，玩apex、mc等</p>
+          </div>
+        </div>
+        
+        <!-- 成员 4 -->
+        <div class="bg-darker rounded-xl overflow-hidden group hover:shadow-xl hover:shadow-primary/10 transition-all duration-300">
+          <div class="relative">
+            <img src="https://picsum.photos/seed/artist/300/300" alt="美术负责人：陈艺" class="w-full aspect-square object-cover object-center">
+            <div class="absolute inset-0 bg-gradient-to-t from-darker to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-6">
+              <div class="flex space-x-4">
+                <a href="#" class="text-white hover:text-primary transition-colors"><i class="fa fa-weixin text-xl"></i></a>
+                <a href="#" class="text-white hover:text-primary transition-colors"><i class="fa fa-qq text-xl"></i></a>
+                <a href="#" class="text-white hover:text-primary transition-colors"><i class="fa fa-github text-xl"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 text-center">
+            <h3 class="text-xl font-bold mb-1 text-white">abc</h3>
+            <p class="text-primary mb-3">鬼</p>
+            <p class="text-gray-400 text-sm">视觉传达专业，擅长游戏美术设计和UI制作，热爱独立游戏。</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-12 text-center">
+        <a href="#contact" class="inline-block bg-primary hover:bg-primary/80 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg shadow-primary/30">
+          认识更多成员
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 加入我们 -->
+  <section id="contact" class="py-20 bg-darker relative">
+    <div class="absolute inset-0 z-0">
+      <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent/10 rounded-full filter blur-3xl"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4 text-white">加入<span class="text-primary">我们</span></h2>
+        <div class="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
+        <p class="mt-6 text-gray-400 max-w-2xl mx-auto">无论你是老玩家还是新玩家，只要你热爱游戏，我们都欢迎你的加入</p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h3 class="text-2xl font-bold mb-6 text-white">联系<span class="text-secondary">我们</span></h3>
+          <p class="text-gray-300 mb-8">
+            填写下方表单加入我们，或者通过以下方式联系我们了解更多社团信息。我们会尽快回复你！
+          </p>
+          
+          <div class="space-y-6">
+            <div class="flex items-start">
+              <div class="bg-primary/20 p-3 rounded-full mr-4">
+                <i class="fa fa-map-marker text-primary text-xl"></i>
+              </div>
+              <div>
+                <h4 class="text-xl font-bold mb-1 text-white">活动室地址</h4>
+                <p class="text-gray-400">不固定</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="bg-primary/20 p-3 rounded-full mr-4">
+                <i class="fa fa-clock-o text-primary text-xl"></i>
+              </div>
+              <div>
+                <h4 class="text-xl font-bold mb-1 text-white">开放时间</h4>
+                <p class="text-gray-400">周一至周五: 18:00 - 22:00</p>
+                <p class="text-gray-400">周六至周日: 10:00 - 22:00</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="bg-primary/20 p-3 rounded-full mr-4">
+                <i class="fa fa-comments text-primary text-xl"></i>
+              </div>
+              <div>
+                <h4 class="text-xl font-bold mb-1 text-white">联系方式</h4>
+                <p class="text-gray-400">QQ群: 123456789</p>
+                <p class="text-gray-400">邮箱: contact@huanmeng9yi.com</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-10 flex space-x-4">
+            <a href="#" class="bg-primary/20 hover:bg-primary/40 text-primary w-12 h-12 rounded-full flex items-center justify-center transition-all">
+              <i class="fa fa-weixin text-xl"></i>
+            </a>
+            <a href="#" class="bg-primary/20 hover:bg-primary/40 text-primary w-12 h-12 rounded-full flex items-center justify-center transition-all">
+              <i class="fa fa-qq text-xl"></i>
+            </a>
+            <a href="#" class="bg-primary/20 hover:bg-primary/40 text-primary w-12 h-12 rounded-full flex items-center justify-center transition-all">
+              <i class="fa fa-bilibili text-xl"></i>
+            </a>
+            <a href="#" class="bg-primary/20 hover:bg-primary/40 text-primary w-12 h-12 rounded-full flex items-center justify-center transition-all">
+              <i class="fa fa-github text-xl"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <form class="bg-dark p-8 rounded-2xl border border-primary/20">
+            <h3 class="text-2xl font-bold mb-6 text-white">加入幻梦九艺社</h3>
+            
+            <div class="mb-6">
+              <label for="name" class="block text-gray-300 mb-2">姓名</label>
+              <input type="text" id="name" class="w-full bg-darker border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors" placeholder="请输入你的姓名">
+            </div>
+            
+            <div class="mb-6">
+              <label for="student-id" class="block text-gray-300 mb-2">学号</label>
+              <input type="text" id="student-id" class="w-full bg-darker border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors" placeholder="请输入你的学号">
+            </div>
+            
+            <div class="mb-6">
+              <label for="major" class="block text-gray-300 mb-2">专业</label>
+              <input type="text" id="major" class="w-full bg-darker border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors" placeholder="请输入你的专业">
+            </div>
+            
+            <div class="mb-6">
+              <label for="interest" class="block text-gray-300 mb-2">感兴趣的领域</label>
+              <select id="interest" class="w-full bg-darker border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
+                <option value="">请选择</option>
+                <option value="gaming">游戏游玩</option>
+                <option value="boardgames">桌面游戏</option>
+                <option value="development">游戏开发</option>
+                <option value="design">游戏设计</option>
+                <option value="art">游戏美术</option>
+                <option value="esports">电子竞技</option>
+                <option value="events">活动策划</option>
+              </select>
+            </div>
+            
+            <div class="mb-8">
+              <label for="message" class="block text-gray-300 mb-2">自我介绍</label>
+              <textarea id="message" rows="4" class="w-full bg-darker border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors" placeholder="简单介绍一下你自己和对游戏的热爱吧"></textarea>
+            </div>
+            
+            <button type="submit" class="w-full bg-primary hover:bg-primary/80 text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-[1.02] shadow-lg shadow-primary/20">
+              提交申请 <i class="fa fa-paper-plane ml-2"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-darker py-12 border-t border-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8 mb-12">
+        <div>
+          <a href="#" class="flex items-center gap-2 mb-6">
+            <span class="text-primary text-2xl"><i class="fa fa-gamepad"></i></span>
+            <span class="font-gaming text-lg text-white">幻梦九艺社</span>
+          </a>
+          <p class="text-gray-400 mb-6">
+            探索游戏的无限可能，结交志同道合的伙伴，一起创造游戏传奇。
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+              <i class="fa fa-weixin text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+              <i class="fa fa-qq text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+              <i class="fa fa-bilibili text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+              <i class="fa fa-github text-xl"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-bold mb-6 text-white">快速链接</h4>
+          <ul class="space-y-3">
+            <li><a href="#about" class="text-gray-400 hover:text-primary transition-colors">关于我们</a></li>
+            <li><a href="#activities" class="text-gray-400 hover:text-primary transition-colors">社团活动</a></li>
+            <li><a href="#members" class="text-gray-400 hover:text-primary transition-colors">社团成员</a></li>
+            <li><a href="#contact" class="text-gray-400 hover:text-primary transition-colors">加入我们</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-bold mb-6 text-white">活动分类</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">线下桌游</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">电子竞技</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">年度游戏嘉年华</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-bold mb-6 text-white">联系我们</h4>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <i class="fa fa-map-marker text-primary mt-1 mr-3"></i>
+              <span class="text-gray-400">学生活动中心 302 室</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-envelope text-primary mt-1 mr-3"></i>
+              <span class="text-gray-400">contact@huanmeng9yi.com</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-qq text-primary mt-1 mr-3"></i>
+              <span class="text-gray-400">123456789</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+        <p>© 2023 幻梦九艺社. 保留所有权利.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 活动历史图片模态框 -->
+  <div id="activity-modal" class="fixed inset-0 z-50 flex items-center justify-center opacity-0 invisible transition-all duration-300">
+    <div class="absolute inset-0 bg-black/70 modal-backdrop"></div>
+    <div class="relative bg-darker rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-auto m-4 transform scale-95 transition-transform duration-300">
+      <div class="p-6 border-b border-gray-700 flex justify-between items-center sticky top-0 bg-darker z-10">
+        <h3 id="modal-title" class="text-2xl font-bold text-white">活动历史照片</h3>
+        <button id="close-modal" class="text-gray-400 hover:text-white text-2xl transition-colors">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="p-6">
+        <div id="boardgames-gallery" class="activity-gallery hidden">
+          <h4 class="text-xl font-bold mb-4 text-gray-300">往期桌游活动照片</h4>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="rounded-lg overflow-hidden shadow-lg img-zoom"><img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/6cae1baa405f4789a41d31c8b90cf2e5~tplv-a9rns2rl98-image.image?rcl=2025080515374256A8A81138C5D71957D3&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1754984262&amp;x-signature=0hNbA9QcMKQspQMIYdn4bCOrALg%3D" alt="桌游活动照片1" class="w-full h-auto"></div>
+            <div class="rounded-lg overflow-hidden shadow-lg img-zoom"><img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/e3f39d8c410240f6970935ddc19076fd~tplv-a9rns2rl98-image.image?rcl=2025080515374654CDD21E52E0F8A67492&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1754984266&amp;x-signature=gnoAE8nNaZ2QbQ%2BpcAYURjCvdmU%3D" alt="桌游活动照片2" class="w-full h-auto"></div>
+            <div class="rounded-lg overflow-hidden shadow-lg img-zoom"><img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/55ce0939a2d041bb9bc9604aba0bb493~tplv-a9rns2rl98-image.image?rcl=20250805153753A88CD87F78B56632E5D5&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1754984274&amp;x-signature=4BQe2d6XxQyUMxSpuztAGBZEXyE%3D" alt="桌游活动照片3" class="w-full h-auto"></div>
+            <div class="rounded-lg overflow-hidden shadow-lg img-zoom"><img src="https://picsum.photos/seed/board4/500/300" alt="桌游活动照片4" class="w-full h-auto"></div>
+            <div class="rounded-lg overflow-hidden shadow-lg img-zoom"><img src="https://picsum.photos/seed/board5/500/300" alt="桌游活动照片5" class="w-full h-auto"></div>
+            <div class="rounded-lg overflow-hidden shadow-lg img-zoom"><img src="https://picsum.photos/seed/board6/500/300" alt="桌游活动照片6" class="w-full h-auto"></div>
+          </div>
+        </div>
+        
+        <div id="esports-gallery" class="activity-gallery hidden">
+          <h4 class="text-xl font-bold mb-4 text-gray-300">往期电竞比赛照片</h4>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="rounded-lg overflow-hidden shadow-lg img-zoom"><img src="https://picsum.photos/seed/esport1/500/300" alt="电竞比赛照片1" class="w-full h-auto"></div>
+            <div class="rounded-lg overflow-hidden shadow-lg img-zoom"><img src="https://picsum.photos/seed/esport2/500/300" alt="电竞比赛照片2" class="w-full h-auto"></div>
+            <div class="rounded-lg overflow-hidden shadow-lg img-zoom"><img src="https://picsum.photos/seed/esport3/500/300" alt="电竞比赛照片3" class="w-full h-auto"></div>
+            <div class="rounded-lg overflow-hidden shadow-lg img-zoom"><img src="https://picsum.photos/seed/esport4/500/300" alt="电竞比赛照片4" class="w-full h-auto"></div>
+            <div class="rounded-lg overflow-hidden shadow-lg img-zoom"><img src="https://picsum.photos/seed/esport5/500/300" alt="电竞比赛照片5" class="w-full h-auto"></div>
+          </div>
+        </div>
+        
+        <div id="gathering-gallery" class="activity-gallery hidden">
+          <h4 class="text-xl font-bold mb-4 text-gray-300">往期年度游戏聚会照片</h4>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="rounded-lg overflow-hidden shadow-lg img-zoom"><img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/96fcf069c5a74030b38e4cdbdd640469~tplv-a9rns2rl98-image.image?rcl=20250805153433D31D797B250B2CB5A9A3&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1754984073&amp;x-signature=LaowsSKYOQ3zQo%2FQa8FSHvb2H9w%3D" alt="年度聚会照片1" class="w-full h-auto"></div>
+            <div class="rounded-lg overflow-hidden shadow-lg img-zoom"><img src="https://picsum.photos/seed/gather2/500/300" alt="年度聚会照片2" class="w-full h-auto"></div>
+            <div class="rounded-lg overflow-hidden shadow-lg img-zoom"><img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/e47592d0464b4745936b75073ee3b9bb~tplv-a9rns2rl98-image.image?rcl=20250805153504727287404C58CD0B7B9B&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1754984105&amp;x-signature=kzM8qg%2FXZvJbUFiH6HFuNbHZ1f8%3D" alt="年度聚会照片3" class="w-full h-auto"></div>
+            <div class="rounded-lg overflow-hidden shadow-lg img-zoom"><img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/code_assistant/3c046d4cc95045bdbb3b4e4e882a8493~tplv-a9rns2rl98-image.image?rcl=20250805153510DA11C7FB51D3622DD37B&amp;rk3s=8e244e95&amp;rrcfp=e75484ac&amp;x-expires=1754984111&amp;x-signature=Eik5OAqF3nG6i6pzZAZeeoDRM6U%3D" alt="年度聚会照片4" class="w-full h-auto"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 回到顶部按钮 -->
+  <button id="back-to-top" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg shadow-primary/30 opacity-0 invisible transition-all z-50">
+    <i class="fa fa-chevron-up"></i>
+  </button>
+
+  <script>
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        navbar.classList.add('py-2', 'bg-darker/95', 'shadow-lg');
+        navbar.classList.remove('py-4', 'bg-darker/80');
+        
+        backToTop.classList.remove('opacity-0', 'invisible');
+        backToTop.classList.add('opacity-100', 'visible');
+      } else {
+        navbar.classList.add('py-4', 'bg-darker/80');
+        navbar.classList.remove('py-2', 'bg-darker/95', 'shadow-lg');
+        
+        backToTop.classList.add('opacity-0', 'invisible');
+        backToTop.classList.remove('opacity-100', 'visible');
+      }
+    });
+    
+    // 移动端菜单切换
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      const icon = menuToggle.querySelector('i');
+      if (mobileMenu.classList.contains('hidden')) {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      } else {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      }
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        // 关闭移动菜单（如果打开）
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+          const icon = menuToggle.querySelector('i');
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+        }
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // 回到顶部
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // 表单提交
+    const form = document.querySelector('form');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('申请已提交！我们会尽快与你联系。');
+        form.reset();
+      });
+    }
+    
+    // 活动历史图片模态框功能
+    const modal = document.getElementById('activity-modal');
+    const closeModal = document.getElementById('close-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const activityCards = document.querySelectorAll('.activity-card');
+    const galleries = document.querySelectorAll('.activity-gallery');
+    
+    // 打开模态框并显示对应活动的图片
+    activityCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const activityType = card.getAttribute('data-activity');
+        const activityName = card.querySelector('h3').textContent;
+        
+        // 更新模态框标题
+        modalTitle.textContent = `${activityName} - 历史照片`;
+        
+        // 隐藏所有画廊，显示对应活动的画廊
+        galleries.forEach(gallery => {
+          gallery.classList.add('hidden');
+        });
+        document.getElementById(`${activityType}-gallery`).classList.remove('hidden');
+        
+        // 显示模态框
+        modal.classList.remove('opacity-0', 'invisible');
+        modal.querySelector('div:nth-child(2)').classList.remove('scale-95');
+        modal.querySelector('div:nth-child(2)').classList.add('scale-100');
+        document.body.style.overflow = 'hidden'; // 防止背景滚动
+      });
+    });
+    
+    // 关闭模态框
+    closeModal.addEventListener('click', closeModalFunc);
+    
+    // 点击模态框背景关闭
+    modal.querySelector('.modal-backdrop').addEventListener('click', closeModalFunc);
+    
+    // 按ESC键关闭模态框
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('invisible')) {
+        closeModalFunc();
+      }
+    });
+    
+    function closeModalFunc() {
+      modal.classList.add('opacity-0', 'invisible');
+      modal.querySelector('div:nth-child(2)').classList.remove('scale-100');
+      modal.querySelector('div:nth-child(2)').classList.add('scale-95');
+      document.body.style.overflow = ''; // 恢复背景滚动
+    }
+  </script>
+
+
+</body></html>
